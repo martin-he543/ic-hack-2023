@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ic-hack-2023"
+version = "0.1.0"
+description = "IC Hack python 3.11 poetry env for sick projet woooo"
+authors = ["JCatton <106551147+JCatton@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "ic_hack_2023"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
