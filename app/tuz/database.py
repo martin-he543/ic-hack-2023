@@ -9,8 +9,8 @@ def db():
     return boto3.resource("dynamodb")
 
 
-def get_item(table, key):
-    table = f"ichack_{table}"
+def get_item(table, key, normal=False):
+    table = f"ichack_{table}" if not normal else table
     print(f"Internal GET to ic{table} for {key}")
     return db().Table(table).get_item(Key=key).get("Item")
 
@@ -53,3 +53,7 @@ def convert_aws_type(v):
 
 def convert_aws_types(obj):
     return {k: convert_aws_type(v) for k, v in obj.items()}
+
+
+def get_parameter(param):
+    return get_item("parameters", {"parameter": param}, normal=True)["value"]
