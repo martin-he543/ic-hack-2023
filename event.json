@@ -1,8 +1,10 @@
 {
-    "account": "id",
-    "username": "username",
-    "password": "password",
-    "home": {
+    "event_name": "name",
+    "accounts": [
+        "id1",
+        "id2"
+    ],
+    "address": {
         "postcode": "postcode",
         "house_number": "number",
         "street": "street"
