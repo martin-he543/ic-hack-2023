@@ -1,5 +1,9 @@
 {
+    "id": "id1",
     "event_name": "name",
+    "admin_accounts": [
+        "adminid1"
+    ],
     "accounts": [
         "id1",
         "id2"
@@ -14,5 +18,6 @@
             "id": "id1",
             "money": 1.1
         }
-    ]
+    ],
+    "money_pool": 0.0
 }
