@@ -19,9 +19,9 @@ setup(name="tuz", version="1.0.0", packages=["tuz"], install_requires=required)
 # address {dict}
 # time {dict}
 #
- # playlist_name 
- # ?? credentials ?? 
- # ?? spotify_username ??
+# playlist_name
+# ?? credentials ??
+# ?? spotify_username ??
 
 # return event_id
 
@@ -67,5 +67,6 @@ setup(name="tuz", version="1.0.0", packages=["tuz"], install_requires=required)
 # seed_genre (optional)
 # target dance (optional)
 
+# more spotify stuff
 
 # return dict
