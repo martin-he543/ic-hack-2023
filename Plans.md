@@ -17,9 +17,13 @@
 ### Front end
 
 - UI
+- Webpage, call API
 - Current/Future events
 - Past events
 
 ### Back end
 
 - Data storage - linked to accounts, don't store name dob etc
+- Uber calling
+- Lambda functions with API gateway
+- AWS
