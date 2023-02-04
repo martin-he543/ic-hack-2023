@@ -31,7 +31,7 @@
 ## Distribution of Work
 
 - Martin; UI
-- Jonte; ubercalling algorithm
+- Jonte; ubercalling algorithm, location management
 - Jamie; Backend, AWS
 - Laura; Music (Spotify)
 - Tom; Groupchats
