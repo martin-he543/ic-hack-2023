@@ -1,5 +1,4 @@
 import json
-from tuz.test import test_function
 from tuz.webchat_handler import read_handler
 
 

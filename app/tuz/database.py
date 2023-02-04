@@ -1,5 +1,5 @@
 from functools import cache
-
+from decimal import Decimal
 from boto3.dynamodb.conditions import Key
 import boto3
 
@@ -34,3 +34,22 @@ def query_equal(table, index, val, primary=False, **kwargs):
         q["IndexName"] = f"{index}-index"
 
     return query(table, q)
+
+
+def is_int(string):
+    try:
+        return float(string).is_integer()
+    except:
+        return False
+
+
+def convert_aws_type(v):
+    if isinstance(v, Decimal):
+        return int(v) if is_int(v) else float(v)
+    if isinstance(v, dict):
+        return convert_aws_types(v)
+    return v
+
+
+def convert_aws_types(obj):
+    return {k: convert_aws_type(v) for k, v in obj.items()}
