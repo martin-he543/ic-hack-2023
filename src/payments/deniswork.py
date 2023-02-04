@@ -1,5 +1,6 @@
 import json
 import logging
+from hashlib import sha256
 
 PAYMENTS = [
     {"event_id": "eid1", "account_id": "aid1", "reason": "vodka", "money": -3},
@@ -69,7 +70,7 @@ def helper_accounts(account_id):
             return account
 
 
-def event_split(event_dict):
+def event_split(event_dict, context):
     payments = helper_payments(event_dict["event_id"])
     event = helper_events(event_dict["event_id"])
     total_spent = 0
@@ -111,6 +112,49 @@ def post_good_contribution(payment):
     logging.warning(json.dumps(payment))
 
 
+def create_account(event, context):
+    account = {
+        "account_id": sha256(event["username"].encode("utf-8")).hexdigest(),
+        "username": event["username"],
+        "password": event["password"],
+        "home": {
+            "postcode": event["postcode"],
+            "house_number": event["house_number"],
+            "street": event["street"],
+        },
+        "dietary_info": event["dietary_info"],
+    }
+    post_create_account(account)
+
+
+def post_create_account(account):
+    """Place holder"""
+    logging.warning(json.dumps(account))
+
+
+def create_event(event, context):
+    event_party = {
+        "event_id": sha256(event["event_name"].encode("utf-8")).hexdigest(),
+        "event_name": event["event_name"],
+        "admin_accounts": event["account_id"],  # account that created
+        "accounts": [],
+        "address": {
+            "postcode": event["postcode"],
+            "house_number": event["house_number"],
+            "street": event["street"],
+        },
+        "date": event["date"],
+        "arrival_ time": event["arrival_time"],
+        "leaving_time": event["leaving_time"],
+    }
+    post_create_event(event_party)
+
+
+def post_create_event(event):
+    """Place holder"""
+    logging.warning(json.dumps(event))
+
+
 def send_money_contribution(event, context):
     payment = {
         "account_id": event["account_id"],
@@ -147,7 +191,28 @@ if __name__ == "__main__":
     }
     event_example = {"event_id": "eid1"}
     account_example = {"account_id": "aid1"}
+    account_example_creation = {
+        "account_id": "account_id",
+        "username": "username",
+        "password": "password",
+        "postcode": "postcode",
+        "house_number": "house_number",
+        "street": "street",
+        "dietary_info": "dietary_info",
+    }
+    money_example = {
+        "account_id": "account_id",
+        "event_id": "event_id",
+        "money": "money",
+    }
     print(event_split(EVENT_DICT))
-    # send_good_contribution(payment_example, None)
-    # print(get_event(event_example, None))
-    # print(get_account(account_example, None))
+    print("\n")
+    send_good_contribution(payment_example, None)
+    print("\n")
+    print(get_event(event_example, None))
+    print("\n")
+    print(get_account(account_example, None))
+    print("\n")
+    create_account(account_example_creation, None)
+    print("\n")
+    send_money_contribution(money_example, None)
