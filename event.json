@@ -8,5 +8,11 @@
         "postcode": "postcode",
         "house_number": "number",
         "street": "street"
-    }
+    },
+    "money": [
+        {
+            "id": "id1",
+            "money": 1.1
+        }
+    ]
 }
