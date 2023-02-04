@@ -1,0 +1,20 @@
+{
+    "event_id": "id",
+    "event_name": "name",
+    "admin_accounts": [
+        "adminid1"
+    ],
+    "accounts": [
+        "id1",
+        "id2"
+    ],
+    "address": {
+        "postcode": "postcode",
+        "house_number": "number",
+        "street": "street"
+    },
+    "money_pool": 0.0,
+    "date": "2023-02-04",
+    "arrival_ time": "12:00",
+    "leavin_time": "12:00"
+}
