@@ -1,30 +1,30 @@
 TEST_WEBCHAT_DATA = [
     {
-        "user_id": 1,
+        "account_id": 1,
         "date_time": "2020-03-20T14:28:23.382748",
         "event_id": 1,
         "text": "haha wow I love you uwu wow",
     },
     {
-        "user_id": 2,
+        "account_id": 2,
         "date_time": "2020-03-21T14:28:23.382748",
         "event_id": 1,
         "text": "awwww i totally wuv u too how wholesome",
     },
     {
-        "user_id": 3,
+        "account_id": 3,
         "date_time": "2020-03-22T14:28:23.382748",
         "event_id": 2,
         "text": "we must plan the destruction of the empire",
     },
     {
-        "user_id": 4,
+        "account_id": 4,
         "date_time": "2020-03-23T14:28:23.382748",
         "event_id": 2,
         "text": "indeed, long live the rebellion",
     },
     {
-        "user_id": 5,
+        "account_id": 5,
         "date_time": "2020-03-23T14:28:23.382748",
         "event_id": 2,
         "text": "oh oh, stinkyyyy",

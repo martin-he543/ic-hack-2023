@@ -1,37 +1,24 @@
 import datetime
 import json
+
+from src.utilities.helpers import TEST_WEBCHAT_DATA
 import logging
 
-from botocore.exceptions import ClientError
-from boto3.dynamodb.conditions import Key
-import boto3
+
+def get_messages(event_id):
+    """Place holder"""
+    return [m for m in TEST_WEBCHAT_DATA if m["event_id"] == event_id]
+
+
+def post_message(message):
+    """Place holder"""
+    logging.warning(json.dumps(message))
 
 
 def read_all_event_msgs(event_id):
-    dynamodb = boto3.resource('dynamodb', region_name="eu-west-2")
-    table = dynamodb.Table("Messages")
-    try:
-        response = table.query(KeyConditionExpression=Key('event_id').eq(event_id))
-    except ClientError as err:
-        logging.error(
-            "Couldn't query for messages in event %s. Here's why: %s: %s", event_id,
-            err.response['Error']['Code'], err.response['Error']['Message'])
-        raise
-    else:
-        messages = [json.loads(message) for message in response['Items']]
-        messages.sort(key=lambda x: x["date_time"])
+    messages = get_messages(event_id)
+    messages.sort(key=lambda x: x["date_time"])
     return messages
-
-
-def post_event_msg(message_dict):
-    dynamodb = boto3.resource('dynamodb', region_name="eu-west-2")
-    table = dynamodb.Table("Messages")
-    try:
-        table.put_item(Item=message_dict)
-    except ClientError as err:
-        logging.error(
-            "Couldn't post message. Here's why: %s: %s",
-            err.response['Error']['Code'], err.response['Error']['Message'])
 
 
 def read_handler(event, context):
@@ -42,10 +29,16 @@ def read_handler(event, context):
 
 def send_handler(event, context):
     message = {
-        "user_id": event["user_id"],
+        "user_id": event["account_id"],
         "date_time": datetime.datetime.now().isoformat(),
         "event_id": event["event_id"],
         "text": event["text"],
     }
-    post_event_msg(message)
-    return True
+    post_message(message)
+
+
+if __name__ == '__main__':
+    lr_event = {"event_id": 2}
+    print(read_handler(lr_event, None))
+    lp_event = {"account_id": 6, "event_id": 2, "text": "haha work go brrrr"}
+    send_handler(lp_event, None)
