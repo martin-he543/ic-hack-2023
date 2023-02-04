@@ -1,5 +1,5 @@
 {
-    "id": "id1",
+    "event_id": "id",
     "event_name": "name",
     "admin_accounts": [
         "adminid1"
@@ -13,11 +13,8 @@
         "house_number": "number",
         "street": "street"
     },
-    "money": [
-        {
-            "id": "id1",
-            "money": 1.1
-        }
-    ],
-    "money_pool": 0.0
+    "money_pool": 0.0,
+    "date": "2023-02-04",
+    "arrival_ time": "12:00",
+    "leavin_time": "12:00"
 }

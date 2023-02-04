@@ -1,0 +1,22 @@
+{
+    "payments": [
+        {
+            "event_id": "eid1",
+            "account_id": "aid1",
+            "reason": "vodka",
+            "money": 1.1
+        },
+        {
+            "event_id": "eid2",
+            "account_id": "aid2",
+            "reason": "vodka",
+            "money": 2.2
+        },
+        {
+            "event_id": "eid3",
+            "account_id": "aid3",
+            "reason": "vodka",
+            "money": 3.3
+        }
+    ]
+}
