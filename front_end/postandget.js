@@ -169,7 +169,7 @@ var post_playlist_generate = (playlist_id, spotify_name, song_count, danceabilit
         body: raw,
         redirect: 'follow'
     };
-    fetch("", requestOptions)
+    fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/spotify_playlist_generate", requestOptions)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -192,7 +192,7 @@ var post_playlist_search = (playlist_id, spotify_name, choice, results) => {
         body: raw,
         redirect: 'follow'
     };
-    fetch("", requestOptions)
+    fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/spotify_playlist_search_add", requestOptions)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -215,7 +215,7 @@ var post_create_playlist = (playlist_id, spotify_name) => {
         body: raw,
         redirect: 'follow'
     };
-    fetch("", requestOptions)
+    fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/spotify_playlist_create", requestOptions)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -314,7 +314,7 @@ var get_search_string = async (search_string) => {
         body: raw,
         redirect: 'follow'
     };
-    var messagedata = fetch("", requestOptions)
+    var messagedata = fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/spotify_search", requestOptions)
         .then(response => response.json())
         .then(data => { return data.body })
         .catch(function (error) {
