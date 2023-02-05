@@ -1,5 +1,5 @@
 import json
-from tuz.deniswork import create_event
+from tuz.deniswork import get_account
 
 
 def lambda_handler(event, context):
@@ -7,5 +7,5 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body": json.dumps(create_event(event["queryStringParameters"], context)),
+        "body": json.dumps(get_account(event["queryStringParameters"], context)),
     }

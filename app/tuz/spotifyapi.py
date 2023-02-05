@@ -91,7 +91,8 @@ def user_authentication(user_id):
         scope=scope_set,
         username=user_id,
     )
-    token = user_auth.get_access_token(check_cache=False)["access_token"]
+    auth_code = user_auth.get_authorization_code()
+    token = user_auth.get_access_token(code=auth_code)["access_token"]
     # token = "BQCWFGnbOlBE2MMEk6UG9MXnphATgbXwKUTTB-PrU6PjAqGxRXsY8zUKZY1RfRPSmqLHi0grqbTbzGr7g480svKk5kcH2nuRVDutMQIyCggMJh1Hm_2U"
     spotify = spotipy.Spotify(token)
     return token, spotify
