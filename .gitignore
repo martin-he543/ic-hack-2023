@@ -3,3 +3,8 @@
 *.idea
 */__pycache__/*
 __pycache__/*
+.aws-sam
+**/__pycache__/*
+__pycache__/*
+.python-version
+.vscode

@@ -1,0 +1,7 @@
+setup.py
+tuz/test.py
+tuz.egg-info/PKG-INFO
+tuz.egg-info/SOURCES.txt
+tuz.egg-info/dependency_links.txt
+tuz.egg-info/requires.txt
+tuz.egg-info/top_level.txt

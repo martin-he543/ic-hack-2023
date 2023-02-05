@@ -1,0 +1,11 @@
+{
+    "account_id": "id",
+    "username": "username",
+    "password": "password",
+    "home": {
+        "postcode": "postcode",
+        "house_number": "number",
+        "street": "street"
+    },
+    "dietary_info": "nut allergy"
+}

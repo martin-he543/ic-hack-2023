@@ -1,0 +1,10 @@
+{
+    "payments": [
+        {
+            "event_id": "eid1",
+            "account_id": "aid2",
+            "reason": "vodka",
+            "money": 1.1
+        }
+    ]
+}
