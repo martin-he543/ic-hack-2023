@@ -12,36 +12,6 @@ def time_wrapper(func, *args, **kwargs):
     print(f'The time taken for the function {func.__name__} was {time_end - time_start}')
     return ret
 
-
-def travellingSalesmanProblem(graph, s, V):
-    # store all vertex apart from source vertex
-    vertex = []
-    for i in range(V):
-        if i != s:
-            vertex.append(i)
-
-    # store minimum weight Hamiltonian Cycle
-    min_path = maxsize
-    next_permutation = permutations(vertex)
-    for i in next_permutation:
-        point_path = [s]
-        # store current Path weight(cost)
-        current_pathweight = 0
-
-        # compute current path weight
-        k = s
-        for j in i:
-            current_pathweight += graph[k][j]
-            k = j
-            point_path.append(j)
-        current_pathweight += graph[k][s]
-
-        # update minimum
-        min_path = min(min_path, current_pathweight)
-
-    return min_path, point_path
-
-
 class CarPooling:
 
     def __init__(self, host_address: str, attendee_addresses: list[str], carshare_address: str = None):
