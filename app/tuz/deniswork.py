@@ -70,19 +70,15 @@ def event_split(body, context):
 
     people.extend(event["admin_accounts"])
 
-    per_person = total_spent / len(people)
+    money_owed = {person: 0 for person in people}
 
-    money_owed = {}
-
-    for person in people:
-        person_added = False
-        for contributor in payments:
-            if person == contributor["account_id"]:
-                money_owed[person] = -per_person + contributor["money"]
-                person_added = True
-        if not person_added:
-            money_owed[person] = -per_person
-
+    for contributor in payments:
+        if contributor["reason"] != "Pay In" and contributor["reason"] != "Withdrawal":
+            money_owed[contributor["account_id"]] += contributor["money"]
+            for person in people:
+                money_owed[person] -= contributor["money"]/len(money_owed)
+        else:
+            money_owed[contributor["account_id"]] -= contributor["money"]
     return money_owed
 
 
@@ -104,6 +100,17 @@ def send_money_contribution(body, context):
         "event_id": body["event_id"],
         "reason": "Pay In",
         "money": body["money"],
+    }
+    put_item("payments", payment)
+
+
+def send_money_withdrawal(body, context):
+    payment = {
+        "payment_id": str(uuid.uuid4()),
+        "account_id": body["account_id"],
+        "event_id": body["event_id"],
+        "reason": "Withdrawal",
+        "money": -body["money"],
     }
     put_item("payments", payment)
 
