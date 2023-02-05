@@ -12,6 +12,7 @@ def time_wrapper(func, *args, **kwargs):
     print(f'The time taken for the function {func.__name__} was {time_end - time_start}')
     return ret
 
+
 class CarPooling:
 
     def __init__(self, host_address: str, attendee_addresses: list[str], carshare_address: str = None):
@@ -233,12 +234,15 @@ def address_from_event(event: dict) -> str:
     address = ', '.join([addr_parts['house_number'], addr_parts['street'], addr_parts['postcode']])
     return address
 
+
 def address_from_account(account: dict) -> str:
     if account is not None:
         address_parts = account['home']
         address = ', '.join([address_parts['house_number'], address_parts['street'], address_parts['postcode']])
         return address
     return None
+
+
 def address_from_accounts(accounts: list) -> list[str]:
     addresses = []
     for acc in accounts:
@@ -247,7 +251,6 @@ def address_from_accounts(accounts: list) -> list[str]:
 
 
 def carpooling_handler(body, context):
-
     # User locations/addresses
     # Host Address
     # Carpooling Address
@@ -281,7 +284,13 @@ def carpooling_handler(body, context):
 
 
 def uberpooling_handler(body, context):
-
+    """
+    carpool_data = {
+            "markers"   : location_list, # list of dictionaries of Long & Lat
+            "total_time": tot_time, # Seconds
+            "CO2"       : tot_time / max_time # A percentage %
+    }
+    """
     # User locations/addresses
     # Host Address
     event = get_item('events', 'event_id', body['event_id'])
@@ -298,7 +307,7 @@ def uberpooling_handler(body, context):
 
     carpool_data = {
             "markers"   : location_list,
-            "total_time": tot_time,
+            "total_time": tot_time // 60,
             "CO2"       : tot_time / max_time
     }
     return carpool_data
