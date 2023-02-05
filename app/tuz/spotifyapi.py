@@ -4,7 +4,7 @@ import numpy as np
 
 
 def get_auth_keys():
-    return '31cff7249b72481688e040188f82b55e', 'b93ffcabe890464f83814a56c221afc6'
+    return '',''
 
 
 def get_object():
@@ -102,7 +102,3 @@ def create_playlist(playlist_name, user_id):
     )
     playlist_id = event_playlist["uri"]
     return playlist_id
-
-
-results = search_func('taylor swift august')
-print(results)
