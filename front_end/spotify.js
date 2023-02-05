@@ -82,19 +82,14 @@ var post_create_playlist = (playlist_id, spotify_name) => {
 var get_search_string = async (search_string) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Access-Control-Allow-Origin", "*")
-    myHeaders.append("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-    myHeaders.append("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
     var raw = JSON.stringify({ "search_string": search_string });
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        redirect: 'follow',
-        mode: "no-cors"
+        redirect: 'follow'
     };
     var messagedata = fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/spotify_search?search_string=" + search_string, requestOptions)
-        .then(response => response.json())
-        .then(data => { return data.body })
+        .then(response => { return response.json() })
         .catch(function (error) {
             console.log(error)
         });

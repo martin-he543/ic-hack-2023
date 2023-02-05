@@ -1,14 +1,14 @@
 var post_create_event = (event_name, account_id, address, date, arrival_time, leaving_time) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({ "event_name": event_name, "account_id": account_id, "address": address, "date": date, "street": street, "arrival_time": arrival_time, "leaving_time": leaving_time });
+    var raw = JSON.stringify({ "event_name": event_name, "account_id": account_id, "address": address, "date": date, "arrival_time": arrival_time, "leaving_time": leaving_time });
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
-    fetch("", requestOptions)
+    fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/event", requestOptions)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -35,17 +35,17 @@ async function get_user() {
     return await digestmessage(username)
 }
 
-createevent = document.getElementById("createEvent")
+var createevent = document.getElementById("createEvent")
 
 createevent.addEventListener('click', () => {
-    formEventName = document.getElementById("newEventName");
-    formPostcode = document.getElementById("newPostcode");
-    formHouseNumber = document.getElementById("newHouseNumber");
-    formStreet = document.getElementById("newStreet");
-    formDate = document.getElementById("newDate");
-    formArrivalTime = document.getElementById("newArrivalTime");
-    formLeavingTime = document.getElementById("newLeavingTime");
-    address = {
+    var formEventName = document.getElementById("newEventName");
+    var formPostcode = document.getElementById("newPostcode");
+    var formHouseNumber = document.getElementById("newHouseNumber");
+    var formStreet = document.getElementById("newStreet");
+    var formDate = document.getElementById("newDate");
+    var formArrivalTime = document.getElementById("newArrivalTime");
+    var formLeavingTime = document.getElementById("newLeavingTime");
+    var address = {
         "postcode": formPostcode.value,
         "street": formStreet.value,
         "house_number": formHouseNumber.value

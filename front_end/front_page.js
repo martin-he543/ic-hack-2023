@@ -8,7 +8,7 @@ var post_create_account = (username, password, postcode, house_number, street, d
         body: raw,
         redirect: 'follow'
     };
-    fetch("", requestOptions)
+    fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/account", requestOptions)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -31,7 +31,7 @@ var get_account = async (account_id) => {
         body: raw,
         redirect: 'follow'
     };
-    var accountdata = fetch("", requestOptions)
+    var accountdata = fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/account?account_id", requestOptions)
         .then(response => response.json())
         .then(data => { return data.body })
         .catch(function (error) {
@@ -48,36 +48,36 @@ async function digestmessage(message) {
     return await hashHex;
 }
 
-createaccount = document.getElementById("createaccount")
+var createaccount = document.querySelectorAll("input[value = S]")[0];
 
 createaccount.addEventListener('click', () => {
-    formUsername = document.getElementById("newUsername");
-    formPostcode = document.getElementById("newPostcode");
-    formHouseNumber = document.getElementById("newHouseNumber");
-    formStreet = document.getElementById("newStreet");
-    formDietaryRequuirement = document.getElementById("newDietaryRequirement");
+    var formUsername = document.getElementById("newUsername");
+    var formPostcode = document.getElementById("newPostcode");
+    var formHouseNumber = document.getElementById("newHouseNumber");
+    var formStreet = document.getElementById("newStreet");
+    var formDietaryRequirement = document.getElementById("newDietaryRequirement");
     if (
-        (formUsername.value == null || formUsername.value == "", formBack.value == null ||
-            formPostcode.value == "", formPostcode.value == null ||
+        (formUsername.value == null || formUsername.value == "" ||
+            formPostcode.value == "" || formPostcode.value == null ||
             formHouseNumber.value == null ||
             formHouseNumber.value == "" || formStreet.value == null ||
-            formStreet.value == "" || formDietaryRequuirement.value == null ||
-            formDietaryRequuirement.value == "")
+            formStreet.value == "" || formDietaryRequirement.value == null ||
+            formDietaryRequirement.value == "")
     ) {
         alert("Fill out everything. Put None for dietary requirements if you have none.");
     }
     else {
-        post_create_account(formUsername.value, formPostcode.value, formHouseNumber.value, formStreet.value, formDietaryRequuirement.value)
-        window.location.href = "main_page.html"
+        post_create_account(formUsername.value, "password", formPostcode.value, formHouseNumber.value, formStreet.value, formDietaryRequirement.value)
+        // window.location.href = "main_page.html"
     }
 });
 
-login = document.getElementById("login")
+var login = document.getElementById("login")
 
 login.addEventListener('click', () => {
-    formUsername = document.getElementById("Username");
+    var formUsername = document.getElementById("Username");
     if (
-        (formUsername.value == null || formUsername.value == "", formBack.value == null)
+        (formUsername.value == null || formUsername.value == "")
     ) {
         alert("Enter Username.");
     }
