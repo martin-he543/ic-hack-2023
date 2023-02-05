@@ -237,6 +237,21 @@ Resources:
             Path: /carpooling
             Method: post
 
+  AddAccountFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: app/
+      Handler: lambda_post_event_add_account.lambda_handler
+      Runtime: python3.9
+      Policies: AmazonDynamoDBFullAccess
+      Architectures:
+      - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /add_account
+            Method: post
   
   
 
