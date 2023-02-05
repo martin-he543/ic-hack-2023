@@ -101,6 +101,6 @@ var get_search_string = async (search_string) => {
     return await messagedata;
 }
 
-// console.log(await get_search_string("Tesselate"))
-// console.log(await post_create_playlist("PlaylistTest", "lhollister03"))
-console.log(await post_playlist_generate("2", "GenerationTest", 10, 0.9))
+console.log(await get_search_string("Tesselate"))
+console.log(await post_create_playlist("PlaylistTest2", "lhollister03"))
+console.log(await post_playlist_generate("2", "GenerationTest2", 10, 0.9))
