@@ -73,7 +73,7 @@ def event_split(body, context):
     money_owed = {person: 0 for person in people}
 
     for contributor in payments:
-        if contributor["reason"] != "Pay In" and "Withdrawal":
+        if contributor["reason"] != "Pay In" and contributor["reason"] != "Withdrawal":
             money_owed[contributor["account_id"]] += contributor["money"]
             for person in people:
                 money_owed[person] -= contributor["money"]/len(money_owed)
