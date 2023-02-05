@@ -1,3 +1,26 @@
+var post_create_account = (event_id, account_ids, carpooler_id = null) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({ "event_id": event_id, "account_ids": account_ids, "carpooler_id": carpooler_id });
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+    fetch("", requestOptions)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Server response wasn\'t OK');
+            }
+        })
+        .then((data) => {
+            return data.statusCode;
+        });
+}
+
 var post_create_account = (username, password, postcode, house_number, street, dietary_info) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
