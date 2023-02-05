@@ -8,7 +8,22 @@
     }
 }
 
-.btns_more {
+@keyframes slideDown {
+    0% {
+        transform: translateY(-300px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.move_up {
     transform: translateY(300px);
     animation: slideUp ease-in-out forwards 1s;
+}
+
+.move_down {
+    transform: translateY(-300px);
+    animation: slideDown ease-in-out forwards 1s;
 }
