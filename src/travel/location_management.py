@@ -14,12 +14,12 @@ class Location:
         if not address:
             address_list = self.gmaps.reverse_geocode(self.location)[0]['address_components']
             address = ''
-            for addr in address_list:
+            for addr in address_list[0]:
                 ', '.join([address, addr['long_name']])
             self.address = address
         else:
             self.address = address
-
+            self.location = self.gmaps.geocode(address)[0]['geometry']['location']
     def __repr__(self):
         return self.address
 
@@ -33,6 +33,15 @@ class Location:
             self._address = new_value
         else:
             raise(ValueError('Incorrect Format of Address, {type(new_value)}, Input'))
+
+    @property
+    def location(self):
+        return self._location
+
+    @location.setter
+    def location(self, new_value):
+        if isinstance(new_value, dict):
+            self._location = new_value
     def get_new_address(self):
         """
         IMPLEMENT SELECTION FROM POSTCODE
@@ -61,7 +70,6 @@ class Location:
             input_location = 'Imperial College London, South Kensington Campus, London SW7 2AZ'
         validation = self.gmaps.addressvalidation(input_location)
         address = validation['result']['address']
-        print(address)
         confirmation = input('Is this your address, Y/N:\t')
         if 'y' in confirmation.lower():
             # IMPLEMENT
