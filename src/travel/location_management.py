@@ -88,8 +88,7 @@ class Location:
             transport = 'driving'
         print(f'{self.address=}\n{destination=}')
         directions_result = self.gmaps.directions(self.address, destination,
-                                                  mode=transport#,
-                                                  #arrival_time=arrival_time
+                                                  mode=transport
                                                   )
 
         duration = directions_result[0]['legs'][0]['duration']['value']  # Duration in seconds
@@ -104,8 +103,7 @@ class Location:
         else:
             transport = 'driving'
         directions_result = self.gmaps.directions(self.address, destination,
-                                                  mode=transport#,
-                                                  #arrival_time=arrival_time
+                                                  mode=transport
                                                   )
 
         duration = directions_result[0]['legs'][0]['distance']['value']  # Distance in km

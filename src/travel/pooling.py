@@ -252,29 +252,56 @@ def query_db_for_address(user_id) -> list[str]:
     return [addr1, addr2, addr3, addr4, addr5]
 
 
-def query_db_for_host_address(event_id) -> list[str]:
+def query_db_for_host_address(body, event_id) -> list[str]:
+    get_item('events', {'event_id': body['event_id']})
     host_add = ['Blackett Laboratory, Imperial College London, London']
     return host_add
 
 
-def carpooling_handler(event, context):
-    # event["user_ids"] -> Query db for location of user id,
-    event = get_item("accounts", {"account_id": body["account_id"]})
-    user_ids = event["user_ids"]
-    carshare_id = event['carshare_id']
-    event_id = event['event_id']
-    event_address = query_db_for_host_address(event_id)[0]
-    addresses = query_db_for_address(user_ids)
-    if event['carshare_id'] != 1:
-        carshare_address = query_db_for_address(carshare_id)[0]
-    else:
-        carshare_address = 'London Heathrow'
+def address_from_event(event: dict) -> str:
+    addr_parts = event['address']
+    address = ', '.join([addr_parts['house_number'], addr_parts['street'], addr_parts['postcode']])
+    return address
 
-    pool = CarPooling(event_address, addresses, carshare_address)
-    pool.location_time_matrix()
-    tot_time = pool.tsp_carshare(timing_not_dist=False)  # Set True for timings, False for distance
+def address_from_account(account: dict) -> str:
+    if account is not None:
+        address_parts = account['home']
+        address = ', '.join([address_parts['house_number'], address_parts['street'], address_parts['postcode']])
+        return address
+    return None
+def address_from_accounts(accounts: list) -> list[str]:
+    addresses = []
+    for acc in accounts:
+        addresses.append(address_from_account(acc))
+    return addresses
+
+
+def carpooling_handler(body, context):
+
+    # User locations/addresses
+    # Host Address
+    # Carpooling Address
+
+    event = get_item('events', 'event_id', body['event_id'])
+    accounts = [get_item("accounts", "account_id", account_id) for account_id in body["account_ids"]]
+    carpooler = get_item('accounts', 'account_id', body['carpooler_id'])
+
+    event_address = address_from_event(event)
+    addresses = address_from_accounts(accounts)
+    carshare_address = address_from_account(carpooler)
+
+    if carshare_address is not None:
+        pool = CarPooling(event_address, addresses, carshare_address)
+        pool.location_time_matrix()
+        tot_time = pool.tsp_carshare(timing_not_dist=False)  # Set True for timings, False for distance
+    else:
+        pool = CarPooling(event_address, addresses)
+        pool.location_time_matrix()
+        tot_time = pool.tsp_ubershare(timing_not_dist=False)  # Set True for timings, False for distance
+
     location_list = pool.get_locations()
     max_time = pool.get_max_amount()
+
     carpool_data = {
             "markers"   : location_list,
             "total_time": tot_time,
@@ -283,12 +310,15 @@ def carpooling_handler(event, context):
     return carpool_data
 
 
-def uberpooling_handler(event, context):
-    # event["user_ids"] -> Query db for location of user id,
-    user_ids = event["user_ids"]
-    event_id = event['event_id']
-    event_address = query_db_for_host_address(event_id)[0]
-    addresses = query_db_for_address(user_ids)
+def uberpooling_handler(body, context):
+
+    # User locations/addresses
+    # Host Address
+    event = get_item('events', 'event_id', body['event_id'])
+    accounts = [get_item("accounts", "account_id", account_id) for account_id in body["account_ids"]]
+
+    event_address = address_from_event(event)
+    addresses = address_from_accounts(accounts)
 
     pool = CarPooling(event_address, addresses)
     pool.location_time_matrix()
