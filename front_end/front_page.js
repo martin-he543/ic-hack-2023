@@ -55,7 +55,7 @@ createaccount.addEventListener('click', () => {
     formPostcode = document.getElementById("newPostcode");
     formHouseNumber = document.getElementById("newHouseNumber");
     formStreet = document.getElementById("newStreet");
-    formDietaryRequuirement = document.getElementById("newDietaryRequuirement");
+    formDietaryRequuirement = document.getElementById("newDietaryRequirement");
     if (
         (formUsername.value == null || formUsername.value == "", formBack.value == null ||
             formPostcode.value == "", formPostcode.value == null ||
@@ -66,9 +66,10 @@ createaccount.addEventListener('click', () => {
     ) {
         alert("Fill out everything. Put None for dietary requirements if you have none.");
     }
-    else (
+    else {
         post_create_account(formUsername.value, formPostcode.value, formHouseNumber.value, formStreet.value, formDietaryRequuirement.value)
-    )
+        window.location.href = "main_page.html"
+    }
 });
 
 login = document.getElementById("login")
@@ -84,6 +85,8 @@ login.addEventListener('click', () => {
         get_account(digestmessage(formUsername.value));
         if (accountdata == null) {
             alert("There is no such account.");
+        } else {
+            window.location.href = "main_page.html"
         }
     }
 });

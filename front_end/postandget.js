@@ -1,4 +1,4 @@
-var post_create_account = (event_id, account_ids, carpooler_id = null) => {
+var post_carpooling = (event_id, account_ids, carpooler_id = null) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify({ "event_id": event_id, "account_ids": account_ids, "carpooler_id": carpooler_id });
