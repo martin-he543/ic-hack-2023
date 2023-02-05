@@ -1,5 +1,5 @@
 import json
-from tuz.webchat_handler import read_handler
+from tuz.deniswork import create_event
 
 
 def lambda_handler(event, context):
@@ -7,7 +7,5 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body": json.dumps(
-            read_handler(event["queryStringParameters"]["event_id"], context)
-        ),
+        "body": json.dumps(create_event(event["queryStringParameters"], context)),
     }

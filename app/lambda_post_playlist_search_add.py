@@ -3,6 +3,8 @@ from tuz.spotifyapi import search_add
 
 
 def lambda_handler(event, context):
+    print(f"Received event:\n{event}\nWith context:\n{context}")
+
     body = json.loads(event[body])
 
     return {

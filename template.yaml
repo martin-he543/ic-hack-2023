@@ -26,6 +26,70 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+  SpotifySearchFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: app/
+      Handler: lambda_get_search_string.lambda_handler
+      Runtime: python3.9
+      Policies: AmazonDynamoDBFullAccess
+      Architectures:
+      - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /spotify_search
+            Method: get
+  PlaylistGenerateFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: app/
+      Handler: lambda_post_playlist_generate.lambda_handler
+      Runtime: python3.9
+      Policies: AmazonDynamoDBFullAccess
+      Architectures:
+      - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /spotify_playlist_generate
+            Method: post
+
+  PlaylistSearchAddFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: app/
+      Handler: lambda_post_playlist_search_add.lambda_handler
+      Runtime: python3.9
+      Policies: AmazonDynamoDBFullAccess
+      Architectures:
+      - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /spotify_playlist_search_add
+            Method: post
+    
+  PlaylistCreateFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: app/
+      Handler: lambda_post_create_playlists.lambda_handler
+      Runtime: python3.9
+      Policies: AmazonDynamoDBFullAccess
+      Architectures:
+      - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /spotify_playlist_create
+            Method: post
+  
+    
 
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group

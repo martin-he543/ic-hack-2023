@@ -54,8 +54,7 @@ def read_all_event_msgs(event_id):
     return messages
 
 
-def read_handler(event, context):
-    event_id = event["event_id"]
+def read_handler(event_id, context):
     data = read_all_event_msgs(event_id)
     return data
 

@@ -1,10 +1,13 @@
 import spotipy
 import requests
 import numpy as np
+from tuz.database import get_parameter
 
 
 def get_auth_keys():
-    return '',''
+    return get_parameter("laura_spotify_client_id"), get_parameter(
+        "laura_spotify_client_secret"
+    )
 
 
 def get_object():
@@ -56,13 +59,15 @@ def search_func(search_string):
         option_uri = song[i]["uri"]
         text_options.append(song[i]["name"] + " by " + song[i]["artists"][0]["name"])
         uri_options.append(song[i]["uri"])
-        album_images.append(song[0]['album']['images'][0]['url'])
-        artist_images.append(spotify.artist(song[0]["artists"][0]['uri'])['images'][0]['url'])
+        album_images.append(song[0]["album"]["images"][0]["url"])
+        artist_images.append(
+            spotify.artist(song[0]["artists"][0]["uri"])["images"][0]["url"]
+        )
 
     results_dict["text"] = text_options
     results_dict["uris"] = uri_options
-    results_dict['album_images'] = album_images
-    results_dict['artist_images'] = artist_images
+    results_dict["album_images"] = album_images
+    results_dict["artist_images"] = artist_images
     return results_dict
 
 
