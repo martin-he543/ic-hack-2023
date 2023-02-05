@@ -8,7 +8,7 @@ var post_carpooling = (event_id, account_ids, carpooler_id = null) => {
         body: raw,
         redirect: 'follow'
     };
-    fetch("", requestOptions)
+    fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/", requestOptions)
         .then((response) => {
             if (response.ok) {
                 return response.json();
