@@ -51,8 +51,8 @@ createevent.addEventListener('click', () => {
         "house_number": formHouseNumber.value
     }
     if (
-        (formEventName.value == null || formEventName.value == "", formBack.value == null ||
-            formPostcode.value == "", formPostcode.value == null ||
+        (formEventName.value == null || formEventName.value == "" ||
+            formPostcode.value == "" || formPostcode.value == null ||
             formHouseNumber.value == null ||
             formHouseNumber.value == "" || formStreet.value == null ||
             formStreet.value == "" || formDate.value == null ||

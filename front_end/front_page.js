@@ -24,14 +24,12 @@ var post_create_account = (username, password, postcode, house_number, street, d
 var get_account = async (account_id) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({ "account_id": account_id });
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        body: raw,
         redirect: 'follow'
     };
-    var accountdata = fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/account?account_id", requestOptions)
+    var accountdata = fetch("https://cwfusu2ly0.execute-api.eu-west-2.amazonaws.com/Prod/account?account_id=" + account_id, requestOptions)
         .then(response => response.json())
         .then(data => { return data.body })
         .catch(function (error) {
